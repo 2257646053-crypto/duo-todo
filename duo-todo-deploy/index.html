@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>我们的待办</title>
+<meta name="theme-color" content="#FF7E97">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="description" content="两个人的专属待办清单，分板块记录，一键转发微信互相提醒。">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-gear" viewBox="0 0 24 24"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1 1.56V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.56-1H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.34-1.88l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.56V3a2 2 0 1 1 4 0v.09A1.7 1.7 0 0 0 15 4.6a1.7 1.7 0 0 0 1.88-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9c.14.62.68 1.06 1.31 1.09H21a2 2 0 1 1 0 4h-.09A1.7 1.7 0 0 0 19.4 15Z" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3 10.5 13.5M21 3l-6.8 18-3.7-7.5L3 9.8 21 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M6.5 18a4.5 4.5 0 0 1-.4-9A6 6 0 0 1 17.7 8a4 4 0 0 1 .3 10H6.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9.5 9.2a2.6 2.6 0 1 1 3.4 2.5c-.7.3-1 .8-1 1.6v.4M12 17h.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 18v2h16v-2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div id="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48"><rect width="48" height="48" rx="14" fill="#FF7E97"/><circle cx="17" cy="17" r="4" fill="#fff"/><circle cx="31" cy="17" r="4" fill="#fff"/><path d="m12 29 7 7 17-16" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="brand-text">
+        <h1>我们的待办</h1>
+        <p id="todayLine">正在加载…</p>
+      </div>
+    </div>
+    <button class="icon-btn" id="btnSettings" aria-label="设置与帮助"><svg class="ic"><use href="#i-gear"></use></svg></button>
+  </header>
+
+  <section class="overview" aria-label="待办概览">
+    <div class="ov-item"><b id="ovMine">0</b><span>我的</span></div>
+    <div class="ov-item"><b id="ovUs">0</b><span>我们</span></div>
+    <div class="ov-item"><b id="ovTa">0</b><span>TA 的</span></div>
+    <div class="ov-item ov-today"><b id="ovToday">0</b><span>今天/逾期</span></div>
+  </section>
+
+  <div class="install-bar" id="installBar" hidden>
+    <div class="install-copy"><b>装到手机桌面</b><span>点开就像 App，图标还能显示未完成任务数</span></div>
+    <button class="install-go" id="btnInstall">添加</button>
+    <button class="install-x" id="btnInstallClose" aria-label="以后再说"><svg class="ic"><use href="#i-close"></use></svg></button>
+  </div>
+
+  <nav class="tabs" id="tabs" aria-label="板块切换">
+    <button class="tab" data-tab="A"><span class="tab-dot dot-a"></span><span class="tab-name">我的</span><span class="tab-count" data-count="A">0</span></button>
+    <button class="tab" data-tab="US"><span class="tab-dot dot-us"></span><span class="tab-name">我们</span><span class="tab-count" data-count="US">0</span></button>
+    <button class="tab" data-tab="B"><span class="tab-dot dot-b"></span><span class="tab-name">TA 的</span><span class="tab-count" data-count="B">0</span></button>
+  </nav>
+
+  <div class="syncbar" id="syncBar"><span class="sync-dot" id="syncDot"></span><span id="syncText">仅存本机</span></div>
+
+  <main class="list" id="list"></main>
+
+  <div class="addbar">
+    <button class="add-btn" id="btnAdd"><svg class="ic"><use href="#i-plus"></use></svg><span>添加待办</span></button>
+  </div>
+</div>
+
+<div class="scrim" id="scrim"></div>
+
+<!-- 添加 / 编辑待办 -->
+<section class="sheet" id="editSheet" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="sheet-head">
+    <button class="head-btn" data-close="editSheet">取消</button>
+    <h2 id="editTitle">添加待办</h2>
+    <button class="head-btn primary" id="btnSaveItem">保存</button>
+  </div>
+  <div class="sheet-body">
+    <label class="field">
+      <span class="field-label">要做什么</span>
+      <input id="fTitle" type="text" maxlength="80" placeholder="比如：一起去超市买牛奶" autocomplete="off">
+    </label>
+    <div class="field">
+      <span class="field-label">放在哪个板块</span>
+      <div class="seg" id="fOwner">
+        <button type="button" data-owner="A">我的</button>
+        <button type="button" data-owner="US">我们</button>
+        <button type="button" data-owner="B">TA 的</button>
+      </div>
+    </div>
+    <div class="field">
+      <span class="field-label">紧急程度（列表会按这个排）</span>
+      <div class="seg" id="fPriority">
+        <button type="button" data-prio="0">普通</button>
+        <button type="button" data-prio="1">重要</button>
+        <button type="button" data-prio="2">紧急</button>
+      </div>
+    </div>
+    <div class="field">
+      <span class="field-label">截止时间（可不填）</span>
+      <input id="fDue" type="datetime-local">
+      <div class="quick" id="fQuick">
+        <button type="button" data-quick="today">今晚 20:00</button>
+        <button type="button" data-quick="tomorrow">明天 09:00</button>
+        <button type="button" data-quick="sunday">本周日 18:00</button>
+        <button type="button" data-quick="clear">清除</button>
+      </div>
+    </div>
+    <label class="field">
+      <span class="field-label">备注（可不填）</span>
+      <textarea id="fNote" rows="3" maxlength="500" placeholder="补充点细节，对方也能看到"></textarea>
+    </label>
+    <button id="btnDeleteItem" class="danger-btn" hidden><svg class="ic"><use href="#i-trash"></use></svg>删除这条待办</button>
+  </div>
+</section>
+
+<!-- 首次使用：选择身份 -->
+<section class="sheet welcome" id="welcomeSheet" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="welcome-top">
+    <div class="welcome-icon"><svg viewBox="0 0 48 48"><rect width="48" height="48" rx="14" fill="#FF7E97"/><circle cx="17" cy="17" r="4" fill="#fff"/><circle cx="31" cy="17" r="4" fill="#fff"/><path d="m12 29 7 7 17-16" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h2>先认识一下你俩</h2>
+    <p>这台手机是谁在用？两个人各自选一次，之后在设置里随时能改。</p>
+  </div>
+  <div class="sheet-body">
+    <label class="field"><span class="field-label">第一个人的昵称</span><input id="nickA" type="text" maxlength="12" value="我"></label>
+    <label class="field"><span class="field-label">第二个人的昵称</span><input id="nickB" type="text" maxlength="12" value="TA"></label>
+    <div class="pick-row">
+      <button class="pick" id="btnPickA"><b>我是 <span id="pickNameA">我</span></b><span>用粉色板块记自己的事</span></button>
+      <button class="pick" id="btnPickB"><b>我是 <span id="pickNameB">TA</span></b><span>用蓝色板块记自己的事</span></button>
+    </div>
+    <p class="hint">选错了没关系，设置里能切换身份、改昵称。</p>
+  </div>
+</section>
+
+<!-- 设置 -->
+<section class="sheet" id="settingsSheet" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="sheet-head">
+    <button class="head-btn" data-close="settingsSheet">关闭</button>
+    <h2>设置</h2>
+    <button class="head-btn primary" id="btnSaveSettings">保存</button>
+  </div>
+  <div class="sheet-body">
+    <div class="card">
+      <h3>身份与昵称</h3>
+      <p class="card-hint">两台手机各选一次，昵称会同步给对方。</p>
+      <div class="two-col">
+        <label class="field"><span class="field-label">第一个人</span><input id="setNameA" type="text" maxlength="12"></label>
+        <label class="field"><span class="field-label">第二个人</span><input id="setNameB" type="text" maxlength="12"></label>
+      </div>
+      <div class="field"><span class="field-label">这台手机是</span>
+        <div class="seg" id="setMe"><button type="button" data-me="A">第一个人</button><button type="button" data-me="B">第二个人</button></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><svg class="ic"><use href="#i-cloud"></use></svg> 双人实时同步 <span class="tag-free">免费</span></h3>
+      <p class="card-hint">不开启也能用，数据只存这台手机。开启后两台手机实时看到对方的新待办。用 Supabase 免费版，0 元、不用绑卡。</p>
+      <label class="field"><span class="field-label">Project URL</span><input id="cloudUrl" type="url" placeholder="https://xxxx.supabase.co" autocomplete="off" spellcheck="false"></label>
+      <label class="field"><span class="field-label">anon public key</span><input id="cloudKey" type="text" placeholder="eyJhbGciOi..." autocomplete="off" spellcheck="false"></label>
+      <label class="field"><span class="field-label">配对房间码（两人填一样的）</span>
+        <div class="inline-input"><input id="cloudRoom" type="text" placeholder="点右边生成" autocomplete="off" spellcheck="false"><button class="mini-btn" id="btnGenRoom">生成</button></div>
+      </label>
+      <div class="btn-row">
+        <button class="soft-btn" id="btnTestCloud">保存并测试</button>
+        <button class="soft-btn" id="btnCopyConfig"><svg class="ic"><use href="#i-copy"></use></svg>复制给 TA</button>
+        <button class="soft-btn" id="btnCloudOff">关闭同步</button>
+      </div>
+      <div class="field" style="margin-top:12px"><span class="field-label">粘贴 TA 发来的配置，一键连上</span>
+        <div class="inline-input"><input id="cfgInput" type="text" placeholder="DUOTODO1|..."><button class="mini-btn" id="btnPasteConfig">导入</button></div>
+      </div>
+      <p class="status-line" id="cloudStatus">未开启</p>
+      <details class="sql-details"><summary>第一次用？点开看建表步骤</summary>
+        <p>1. 打开 <b>supabase.com</b>，用 GitHub 账号免费注册（不用绑卡）→ New project，地区选 Singapore 或 Tokyo，记下数据库密码。</p>
+        <p>2. 左侧 <b>SQL Editor</b> → New query → 把下面整段粘进去点 Run。</p>
+        <button class="soft-btn" id="btnCopySQL"><svg class="ic"><use href="#i-copy"></use></svg>复制建表 SQL</button>
+        <p>3. 左侧 <b>Project Settings → API</b>，复制 Project URL 和 anon public key，填到上面。</p>
+        <p>4. 点「生成」拿到房间码，再点「复制给 TA」发到微信，对方在设置里粘贴导入即可。</p>
+        <p class="warn">提示：免费项目 7 天没人访问会暂停，去后台点一下 Resume 就行；本应用数据仍完整存在各自手机里，不会丢。</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <h3>数据</h3>
+      <p class="card-hint">换手机或想备份时，导出一个文件；对方导入即可合并，不会覆盖已有内容。</p>
+      <div class="btn-row">
+        <button class="soft-btn" id="btnExport"><svg class="ic"><use href="#i-download"></use></svg>导出备份</button>
+        <button class="soft-btn" id="btnImport">导入备份</button>
+        <button class="soft-btn danger" id="btnClear">清空全部</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <button class="link-row" id="btnHelp"><svg class="ic"><use href="#i-help"></use></svg><span>使用帮助 / 装到桌面 / 微信提醒</span><svg class="ic chev"><use href="#i-chevron"></use></svg></button>
+      <p class="version">我们的待办 · v1.0 · 数据默认只存在你的手机</p>
+    </div>
+  </div>
+</section>
+
+<!-- 帮助 -->
+<section class="sheet" id="helpSheet" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="sheet-head">
+    <button class="head-btn" data-close="helpSheet">返回</button>
+    <h2>使用帮助</h2>
+    <span style="width:52px"></span>
+  </div>
+  <div class="sheet-body help-body">
+    <section class="help-sec">
+      <h3>1. 装到手机桌面（两台 Android）</h3>
+      <p>用 <b>Chrome</b> 打开本页链接 → 如果顶部出现「装到手机桌面」提示条，直接点「添加」即可；没出现就点 Chrome 右上角 <b>⋮</b> → <b>安装应用</b> 或 <b>添加到主屏幕</b>。</p>
+      <p>从桌面图标打开是全屏的，没有地址栏。多数启动器会在图标上显示未完成数量的角标。</p>
+    </section>
+    <section class="help-sec">
+      <h3>2. 两台手机怎么配对</h3>
+      <p>① 各自打开应用，选择「这台手机是谁」，两人选不同的人。<br>② 不配置云也能用：各自记各自的，用提醒按钮把事发到微信。<br>③ 想实时同步：按设置页「第一次用？点开看建表步骤」做一次，约 3 分钟，全程免费。两人房间码一致即可。</p>
+    </section>
+    <section class="help-sec">
+      <h3>3. 微信里互相提醒</h3>
+      <p>每条待办右边的纸飞机按钮 → 自动生成一段提醒文字 → 弹出系统分享面板 → 选 <b>微信</b> → 选对方发送。若浏览器不支持分享，文字会自动复制，打开微信粘贴即可。</p>
+      <p>微信没有开放「自动给个人发消息」的接口，所以这一步需要你点一下，好处是零配置、不受条数限制、不会被风控。</p>
+    </section>
+    <section class="help-sec">
+      <h3>4. 板块与权限</h3>
+      <p>三个板块都有自己的添加框：<b>我的</b> / <b>我们</b> / <b>TA 的</b>。对方板块可以帮 TA 记一条，但只有 TA 本人能勾选完成。共同区两人都能添加和勾选。</p>
+      <p>紧急程度分「普通 / 重要 / 紧急」，列表自动按紧急优先、再按截止时间排，已完成自动沉底。</p>
+    </section>
+    <section class="help-sec">
+      <h3>5. 隐私与可靠性</h3>
+      <p>所有待办默认只存在本机浏览器存储里，不上传。开启云同步后，数据存放在你自己注册的 Supabase 项目里，靠一长串随机房间码区分；链接和配置别外传。</p>
+      <p>免费云有休眠机制，但本地始终有一份完整数据，云断了应用照常用。建议偶尔用「导出备份」存一份文件。</p>
+    </section>
+  </div>
+</section>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="importFile" accept="application/json,.json" hidden>
+
+<script src="app.js"></script>
+</body>
+</html>
